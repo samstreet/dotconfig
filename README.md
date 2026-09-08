@@ -31,13 +31,18 @@ this working tree.
 - `.config/dunst` — notifications
 - `.config/picom` — compositor (blur, rounded corners, neon glow shadow)
 - `.config/alacritty` — terminal, Tokyo Night–based colors
+- `.Xresources` — pins `Xft.dpi` to 96 so apps that auto-detect DPI from the
+  monitor's physical size (Firefox, Qt/Electron) don't render oversized;
+  loaded on i3 startup via `exec xrdb -merge ~/.Xresources`
 
 ## Known machine-specific bits
 
 These aren't generalized — check them after cloning onto a new machine:
 
-- `.config/i3/config` has `exec xrandr --output HDMI-1 --mode 1920x1080 ...`
-  — adjust or remove for a different monitor setup.
+- `.config/i3/config` has `exec xrandr --output eDP-1 --scale 1.25x1.25`
+  — output name and scale factor are specific to this laptop's panel;
+  adjust or remove for a different monitor setup. Note xrandr's scale is
+  inverted from intuition: >1 shrinks UI (more desktop space), <1 enlarges it.
 - Keyboard layout is hardcoded to `gb` in the Alt/Ctrl swap step.
 - `$mod+Shift+p` runs `gnome-calculator`, `$mod+Shift+f` opens `thunar` —
   install anything you want that isn't already in `packages.txt`.
