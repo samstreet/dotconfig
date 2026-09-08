@@ -31,6 +31,9 @@ this working tree.
 - `.config/dunst` — notifications
 - `.config/picom` — compositor (blur, rounded corners, neon glow shadow)
 - `.config/alacritty` — terminal, Tokyo Night–based colors
+- `.config/fish` — shell config; overrides `fish_greeting` (from the
+  system-wide `cachyos-fish-config`) to a no-op so new terminals don't run
+  fastfetch. `fish_variables` (local shell state) is gitignored.
 - `.Xresources` — pins `Xft.dpi` to 96 so apps that auto-detect DPI from the
   monitor's physical size (Firefox, Qt/Electron) don't render oversized;
   loaded on i3 startup via `exec xrdb -merge ~/.Xresources`
