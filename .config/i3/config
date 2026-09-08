@@ -1,0 +1,269 @@
+set $mod Mod4
+font pango:Hack 9
+floating_modifier $mod
+
+# gaps so picom's neon window glow actually has room to show
+gaps inner 10
+gaps outer 4
+smart_gaps on
+
+# start a terminal
+set $term alacritty
+bindsym $mod+Return exec $term
+
+# omarchy-style app launches
+bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+n exec $term -e vim
+
+# kill focused window (omarchy binds both Q and W)
+bindsym $mod+q kill
+bindsym $mod+w kill
+
+# start dmenu (a program launcher)
+#bindsym ctrl+space exec rofi -show run
+bindsym ctrl+space exec "rofi -show combi -modi window,run,combi -combi-modi window,run"
+#bindsym ctrl+space exec dmenu_run
+
+# omarchy menu: super+space opens an application search box (drun reads .desktop entries,
+# unlike "run" which just executes whatever raw command you type)
+bindsym $mod+space exec "rofi -show drun"
+
+# omarchy-style window switcher (closest i3 equivalent to Hyprland's alt-tab cycling)
+bindsym Mod1+Tab exec "rofi -show window"
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# omarchy: super+j toggles the window split
+bindsym $mod+j split toggle
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# (moved off s/w so they're free for omarchy's scratchpad/close binds)
+bindsym $mod+Ctrl+s layout stacking
+bindsym $mod+Ctrl+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+w sticky toggle
+
+# toggle tiling / floating (omarchy: super+t)
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+t floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Ctrl+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# omarchy: super+tab / super+shift+tab cycle workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# omarchy: super+s toggles the scratchpad, super+shift+s sends a window to it
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
+bindsym $mod+grave scratchpad show
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+#
+# Status Bar:
+#
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# tokyo neon
+set $bg      #0d0e1a
+set $fg      #c0caf5
+set $pink    #ff2ec4
+set $cyan    #2ee6ff
+set $muted   #3b3f58
+
+# class                 border  backgr. text    indicator child_border
+client.focused          $pink   $bg     $fg     $cyan     $pink
+client.focused_inactive $muted  $bg     $fg     $muted    $muted
+client.unfocused        $muted  $bg     #6b7089 $muted    $muted
+client.urgent           #ff5566 $bg     $fg     #ff5566   #ff5566
+client.placeholder      $muted  $bg     $fg     $muted    $muted
+client.background       $bg
+
+########################################################################
+########################################################################
+####
+####                   Workplaces layout
+####
+########################################################################
+########################################################################
+
+exec --no-startup-id "i3-msg 'workspace 1; exec alacritty'"
+
+########################################################################
+########################################################################
+####
+####                   Floated windows
+####
+########################################################################
+########################################################################
+
+for_window [title="Calculator"] floating enable
+for_window [title="Timer"] floating enable
+for_window [class="^.*"] border pixel 1
+for_window [class="librewolf"] border none
+for_window [class="firefox"] border none
+for_window [class="mpv"] floating enable
+for_window [class="imv"] floating enable
+for_window [class="zenity"] floating enable
+for_window [class="cachyos-welcome"] floating enable
+
+
+########################################################################
+########################################################################
+####
+####                   HOTKEYS
+####
+########################################################################
+########################################################################
+
+
+bindsym XF86AudioRaiseVolume exec "pamixer -ui 3 && pamixer --get-volume > /tmp/xobpipe"
+bindsym XF86AudioLowerVolume exec "pamixer -ud 3 && pamixer --get-volume > /tmp/xobpipe"
+# mute sound
+bindsym XF86AudioMute exec "amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/xobpipe"
+bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+
+# brightness (needs: sudo pacman -S brightnessctl)
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# media playback (needs: sudo pacman -S playerctl)
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# screenshots, omarchy-style (needs: sudo pacman -S flameshot)
+bindsym Print exec flameshot gui
+bindsym $mod+Print exec flameshot gui
+bindsym $mod+Shift+Print exec "flameshot full -c"
+
+bindsym $mod+Shift+p exec gnome-calculator
+#bindsym $mod+p exec ~/.scripts/dmshot
+
+## This will switch the current layout to the 'us'.
+#bindsym $mod+l exec "setxkbmap -layout us && sleep 0.1 && setxkbmap -option grp:caps_toggle 'us,ru' -option grp_led:caps && sleep 0.1 && i3lock --blur 5"
+
+## This keybind will lock the screen. The lockscreen.
+## (omarchy binds lock to super+ctrl+l, keeping super+l too since it's already muscle memory here)
+set $lock i3lock --blur 5 --indicator --clock --radius=140 --ring-width=4 --inside-color=1a1b26cc --ring-color=ff2ec4ff --insidever-color=1a1b26cc --ringver-color=2ee6ffff --insidewrong-color=1a1b26cc --ringwrong-color=ff5566ff --line-color=00000000 --keyhl-color=2ee6ffff --bshl-color=ff5566ff --separator-color=00000000 --verif-color=c0caf5ff --wrong-color=ff5566ff --time-color=c0caf5ff --date-color=c0caf5ff --layout-color=c0caf5ff
+bindsym $mod+l exec "sleep 0.1 && $lock"
+bindsym $mod+Ctrl+l exec "sleep 0.1 && $lock"
+
+########################################################################
+########################################################################
+####
+####                   AUTOLOAD
+####
+########################################################################
+########################################################################
+
+## Here is a language switcher by pressing capslock button,
+## and the capslock functionality available by using shift+capslock.
+## Uncomment to enable 'us' to/from 'ru' switch. change to language(s) you prefer more.
+
+#exec_always setxkbmap -option grp:caps_toggle "us,ru" -option "grp:caps_toggle,grp_led:caps"
+
+exec xrandr --output HDMI-1 --mode 1920x1080 --rate 60 --scale 1x1
+#exec xrandr --auto --output HDMI-1 --mode 1920x1080 --above HDMI-2
+
+exec feh --bg-fill ~/.config/i3/wallpaper.jpg
+
+exec --no-startup-id dunst
+exec --no-startup-id picom
+exec --no-startup-id redshift
+exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# hyprland-style dwindle/spiral tiling: alternates split direction based on
+# container dimensions instead of i3's default of always splitting the same way
+exec --no-startup-id autotiling
+
+exec_always mkfifo /tmp/xobpipe && tail -f /tmp/xobpipe | xob -t 2170 & disown
+#exec ~/.i3/launch.sh

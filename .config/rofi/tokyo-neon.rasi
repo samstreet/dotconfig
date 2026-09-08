@@ -1,0 +1,76 @@
+* {
+    bg:        #0d0e1aE6;
+    bg-alt:    #1a1b26;
+    fg:        #c0caf5;
+    fg-muted:  #565f89;
+    pink:      #ff2ec4;
+    cyan:      #2ee6ff;
+
+    background-color: transparent;
+    text-color:       @fg;
+    font:             "Hack 11";
+}
+
+window {
+    background-color: @bg;
+    border:           2px;
+    border-color:     @pink;
+    border-radius:    10px;
+    width:            560px;
+    padding:          4px;
+}
+
+mainbox {
+    children: [inputbar, listview];
+    spacing: 10px;
+    padding: 12px;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius:     8px;
+    padding:            8px 12px;
+    children: [prompt, entry];
+}
+
+prompt {
+    text-color: @pink;
+}
+
+entry {
+    text-color:   @fg;
+    placeholder:  "Search…";
+    placeholder-color: @fg-muted;
+    padding: 0px 0px 0px 8px;
+}
+
+listview {
+    lines:        8;
+    scrollbar:    false;
+    spacing:      2px;
+    fixed-height: false;
+}
+
+element {
+    padding:       6px 10px;
+    border-radius: 6px;
+}
+
+element normal.normal {
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-alt;
+    text-color:        @cyan;
+    border:             0px 0px 0px 2px;
+    border-color:       @pink;
+}
+
+element-icon {
+    size: 1.1em;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
