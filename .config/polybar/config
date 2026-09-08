@@ -41,7 +41,7 @@ font-0 = Hack:pixelsize=10;2
 font-1 = "MesloLGS Nerd Font Mono:pixelsize=11;3"
 
 modules-left = i3
-modules-right = updates eth wlan pulseaudio battery date tray
+modules-right = updates eth wlan memory pulseaudio battery date tray
 
 wm-restack = i3
 
@@ -102,6 +102,13 @@ format-connected = <label-connected>
 label-connected = " %essid%"
 label-connected-foreground = ${colors.secondary}
 format-disconnected =
+
+[module/memory]
+type = internal/memory
+interval = 3
+format = <label>
+label = " %percentage_used%% %gb_used%"
+label-foreground = ${colors.foreground}
 
 [module/pulseaudio]
 type = internal/pulseaudio
