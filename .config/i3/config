@@ -256,11 +256,13 @@ exec --no-startup-id xrdb -merge ~/.Xresources
 
 # laptop panel: scale >1 renders more logical pixels into the same physical
 # panel, shrinking UI elements for more usable desktop space
-exec --no-startup-id xrandr --output eDP-1 --scale 1.25x1.25
+#
+# chained with feh below (rather than a separate exec) because i3 fires
+# execs in parallel, not sequentially - feh could otherwise paint the
+# wallpaper for the old resolution before xrandr finishes applying the scale
+exec --no-startup-id xrandr --output eDP-1 --scale 1.25x1.25 && feh --bg-fill ~/.config/i3/wallpaper.jpg
 
 #exec xrandr --auto --output HDMI-1 --mode 1920x1080 --above HDMI-2
-
-exec feh --bg-fill ~/.config/i3/wallpaper.jpg
 
 exec --no-startup-id dunst
 exec --no-startup-id picom
