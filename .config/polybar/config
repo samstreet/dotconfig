@@ -37,8 +37,8 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "JetBrainsMono Nerd Font:pixelsize=10;2"
-font-1 = "JetBrainsMono Nerd Font Mono:pixelsize=11;3"
+font-0 = "JetBrainsMono Nerd Font:pixelsize=12;2"
+font-1 = "JetBrainsMono Nerd Font Mono:pixelsize=13;3"
 
 modules-left = i3
 modules-right = updates eth wlan memory pulseaudio battery date tray
