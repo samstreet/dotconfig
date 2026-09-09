@@ -10,8 +10,8 @@ pamixer
 alsa-utils
 dex
 xorg-xrandr
-ttf-hack
-ttf-meslo-nerd
+ttf-jetbrains-mono-nerd
+zsh
 pacman-contrib
 polkit-gnome
 autotiling

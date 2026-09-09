@@ -34,9 +34,18 @@ this working tree.
 - `.config/fish` — shell config; overrides `fish_greeting` (from the
   system-wide `cachyos-fish-config`) to a no-op so new terminals don't run
   fastfetch. `fish_variables` (local shell state) is gitignored.
-- `.Xresources` — pins `Xft.dpi` to 96 so apps that auto-detect DPI from the
-  monitor's physical size (Firefox, Qt/Electron) don't render oversized;
-  loaded on i3 startup via `exec xrdb -merge ~/.Xresources`
+- `.Xresources` — pins `Xft.dpi` to 96 (apps that auto-detect DPI from the
+  monitor's physical size otherwise render oversized) and sets explicit
+  hinting/antialiasing (`hintfull`, grayscale AA — subpixel would fringe
+  under picom's transparency); loaded on i3 startup via `exec xrdb -merge`
+- `.zshrc` — oh-my-zsh config, `ZSH_THEME="tokyo-neon"`
+- `oh-my-zsh-custom/themes/tokyo-neon.zsh-theme` — custom prompt matching
+  the rest of the rice (pink path, cyan git branch); symlinked into
+  `~/.oh-my-zsh/custom/themes/`, not `.config`, since that's where oh-my-zsh
+  expects it. `install.sh` installs oh-my-zsh itself if it's missing.
+  Alacritty's `[terminal] shell` is pinned to `/usr/bin/zsh` since this
+  session's `$SHELL` resolves to fish (via the ly-dm login chain) rather
+  than the passwd entry alacritty would otherwise fall back to.
 
 ## Known machine-specific bits
 
@@ -56,4 +65,8 @@ These aren't generalized — check them after cloning onto a new machine:
 Palette: background `#0d0e1a`, surface `#1a1b26`, foreground `#c0caf5`,
 pink `#ff2ec4` (primary accent), cyan `#2ee6ff` (secondary), red `#ff5566`
 (alerts). Same palette across i3 borders, polybar, rofi, dunst, alacritty,
-and the i3lock ring colors.
+the zsh prompt, and the i3lock ring colors.
+
+Font: JetBrains Mono Nerd Font everywhere (bar/rofi/dunst text and
+alacritty), verified to cover the icon glyph ranges used (`e0a0-e0d7`,
+`f000-f385`, `f400-f533`) before switching off Hack/MesloLGS.

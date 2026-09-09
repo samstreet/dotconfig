@@ -37,6 +37,15 @@ for f in "$REPO_DIR"/.[!.]*; do
     link "$f" "$HOME/$name"
 done
 
+echo "==> Setting up oh-my-zsh"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+    echo "  already installed"
+fi
+mkdir -p "$HOME/.oh-my-zsh/custom/themes"
+link "$REPO_DIR/oh-my-zsh-custom/themes/tokyo-neon.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/tokyo-neon.zsh-theme"
+
 echo "==> Swapping left Alt / left Ctrl (left Alt becomes Ctrl)"
 read -rp "    Apply this keyboard change now? [y/N] " reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
