@@ -1,5 +1,5 @@
 [global]
-    font = Hack 10
+    font = JetBrainsMono Nerd Font 10
     padding = 1
     frame_color = "#ff2ec4"
     frame_width = 2
