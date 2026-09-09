@@ -2,6 +2,11 @@
 working_directory = "None"
 live_config_reload = true
 
+# force zsh regardless of $SHELL - this session's $SHELL resolves to fish
+# (traced to the ly-dm login/session chain), not the passwd entry (/usr/bin/zsh)
+[terminal]
+shell = { program = "/usr/bin/zsh" }
+
 [env]
 TERM = "xterm-256color"
 WINIT_X11_SCALE_FACTOR = "1.0"
